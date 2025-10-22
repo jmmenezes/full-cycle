@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Produtos",
+    "description": "API Produtos",
+    "version": "1.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "Produtos",
+      "description": "Operações relacionadas ao cadastro de produtos."
+    }
+  ],
+  "paths": {
+    "/products": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Cria um novo produto",
+        "description": "Cria um novo registro de produto no sistema, exigindo nome, descrição, preço de compra e estoque.",
+        "operationId": "createProduct",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "in": "body",
+            "description": "Dados do produto a ser criado.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto criado com sucesso.",
+            "schema": {
+              "$ref": "#/definitions/ProductOutput"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "type": "object",
+      "required": [
+        "name",
+        "description",
+        "purchasePrice",
+        "stock"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Teclado Mecânico"
+        },
+        "description": {
+          "type": "string",
+          "example": "Teclado RGB com switches marrons."
+        },
+        "purchasePrice": {
+          "type": "number",
+          "format": "float",
+          "example": 250.50,
+          "description": "Preço de compra do produto."
+        },
+        "stock": {
+          "type": "integer",
+          "example": 80,
+          "description": "Quantidade em estoque."
+        }
+      }
+    },
+    "ProductOutput": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "e0d0b0a0-1234-5678-abcd-0123456789ab"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "purchasePrice": {
+          "type": "number",
+          "format": "float"
+        },
+        "stock": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
