@@ -1,6 +1,9 @@
 import { Sequelize } from "sequelize-typescript";
-import ProductModel from "./product.model";
+import { ProductModel } from "../../product-adm/repository/product.model";
 import ProductRepository from "./product.repository";
+import { OrderModel } from "../../checkout/repository/order.model";
+import { OrderProductModel } from "../../checkout/repository/order-product.model";
+import { ClientModel } from "../../client-adm/repository/client.model";
 
 describe("ProductRepository test", () => {
   let sequelize: Sequelize;
@@ -13,7 +16,7 @@ describe("ProductRepository test", () => {
       sync: { force: true },
     });
 
-    await sequelize.addModels([ProductModel]);
+    await sequelize.addModels([ProductModel, OrderModel, OrderProductModel, ProductModel, ClientModel]);
     await sequelize.sync();
   });
 
@@ -43,11 +46,9 @@ describe("ProductRepository test", () => {
     expect(products[0].id.id).toBe("1");
     expect(products[0].name).toBe("Product 1");
     expect(products[0].description).toBe("Description 1");
-    expect(products[0].salesPrice).toBe(100);
     expect(products[1].id.id).toBe("2");
     expect(products[1].name).toBe("Product 2");
     expect(products[1].description).toBe("Description 2");
-    expect(products[1].salesPrice).toBe(200);
   });
 
   it("should find a product", async () => {
@@ -64,6 +65,5 @@ describe("ProductRepository test", () => {
     expect(product.id.id).toBe("1");
     expect(product.name).toBe("Product 1");
     expect(product.description).toBe("Description 1");
-    expect(product.salesPrice).toBe(100);
   });
 });

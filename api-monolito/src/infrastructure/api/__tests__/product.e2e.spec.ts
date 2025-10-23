@@ -29,7 +29,7 @@ describe("E2E test for products", () => {
 
   it("should not create a product", async () => {
     const response = await request(app).post("/products").send({
-      name: "err",
+      description: "xpto",
     });
     expect(response.status).toBe(500);
   });

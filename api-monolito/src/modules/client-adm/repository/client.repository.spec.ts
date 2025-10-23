@@ -4,6 +4,9 @@ import ClientRepository from "./client.repository"
 import Client from "../domain/client.entity"
 import Id from "../../@shared/domain/value-object/id.value-object"
 import Address from "../../@shared/domain/value-object/address"
+import { OrderModel } from "../../checkout/repository/order.model"
+import { OrderProductModel } from "../../checkout/repository/order-product.model"
+import { ProductModel } from "../../product-adm/repository/product.model"
 
 describe("Client Repository test", () => {
 
@@ -17,7 +20,7 @@ describe("Client Repository test", () => {
       sync: { force: true }
     })
 
-    sequelize.addModels([ClientModel])
+    sequelize.addModels([ClientModel, OrderModel, OrderProductModel, ProductModel])
     await sequelize.sync()
   })
 

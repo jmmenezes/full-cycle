@@ -5,6 +5,9 @@ import AddClientUseCase from "../usecase/add-client/add-client.usecase"
 import ClientAdmFacade from "./client-adm.facade"
 import ClientAdmFacadeFactory from "../factory/client-adm.facade.factory"
 import Address from "../../@shared/domain/value-object/address"
+import { OrderModel } from "../../checkout/repository/order.model"
+import { OrderProductModel } from "../../checkout/repository/order-product.model"
+import { ProductModel } from "../../product-adm/repository/product.model"
 
 
 describe("Client Adm Facade test", () => {
@@ -19,7 +22,7 @@ describe("Client Adm Facade test", () => {
       sync: { force: true }
     })
 
-    sequelize.addModels([ClientModel])
+    sequelize.addModels([ClientModel, OrderModel, OrderProductModel, ProductModel])
     await sequelize.sync()
   })
 

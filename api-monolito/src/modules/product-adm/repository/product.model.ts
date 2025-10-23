@@ -1,4 +1,6 @@
-import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { OrderModel } from "../../checkout/repository/order.model";
+import { OrderProductModel } from "../../checkout/repository/order-product.model";
 
 @Table({
   tableName: "products",
@@ -12,18 +14,18 @@ export class ProductModel extends Model {
   @Column({ allowNull: false })
   name: string;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: true })
   description: string;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: true })
   purchasePrice: number;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: true })
   stock: number;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: true })
   createdAt: Date;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: true })
   updatedAt: Date;
 }
