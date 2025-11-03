@@ -3,9 +3,16 @@ import Customer from "../../../../domain/customer/entity/customer";
 import Address from "../../../../domain/customer/value-object/address";
 import CustomerModel from "./customer.model";
 import CustomerRepository from "./customer.repository";
+import { Transaction } from "sequelize";
+import { TransactionSequelize } from "../../../transaction-sequelize";
 
 describe("Customer repository test", () => {
   let sequelize: Sequelize;
+  let context = {
+    get: async (name: string): Promise<any> => {
+        return "customer"; 
+    }
+  };
 
   beforeEach(async () => {
     sequelize = new Sequelize({
@@ -25,6 +32,7 @@ describe("Customer repository test", () => {
 
   it("should create a customer", async () => {
     const customerRepository = new CustomerRepository();
+    customerRepository.setTransaction(new TransactionSequelize(context, sequelize));
     const customer = new Customer("123", "Customer 1");
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer.Address = address;
@@ -46,6 +54,7 @@ describe("Customer repository test", () => {
 
   it("should update a customer", async () => {
     const customerRepository = new CustomerRepository();
+    customerRepository.setTransaction(new TransactionSequelize(context, sequelize));
     const customer = new Customer("123", "Customer 1");
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer.Address = address;
@@ -69,6 +78,7 @@ describe("Customer repository test", () => {
 
   it("should find a customer", async () => {
     const customerRepository = new CustomerRepository();
+    customerRepository.setTransaction(new TransactionSequelize(context, sequelize));
     const customer = new Customer("123", "Customer 1");
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer.Address = address;
@@ -89,6 +99,7 @@ describe("Customer repository test", () => {
 
   it("should find all customers", async () => {
     const customerRepository = new CustomerRepository();
+    customerRepository.setTransaction(new TransactionSequelize(context, sequelize));
     const customer1 = new Customer("123", "Customer 1");
     const address1 = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer1.Address = address1;
