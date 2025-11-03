@@ -1,5 +1,6 @@
 import { AgreggateRoot } from "../../@shared/domain/aggregate-root";
 import Address from "../value-object/address";
+import { CustomerAddressChanged } from "./customer-address-changed.event";
 import { CustomerCreated } from "./customer-created.event";
 import { CustomerNameChanged } from "./customer-name-changed.event";
 
@@ -57,6 +58,7 @@ export default class Customer extends AgreggateRoot {
 
   changeAddress(address: Address) {
     this._address = address;
+    this.addEvent(new CustomerAddressChanged(this.id, this.name, address));
   }
 
   isActive(): boolean {

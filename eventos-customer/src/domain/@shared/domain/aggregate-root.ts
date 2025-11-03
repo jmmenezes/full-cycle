@@ -6,7 +6,7 @@ export abstract class AgreggateRoot{
 
     addEvent(event: IDomainEvent){
         this.events.add(event);
-    }   
+    }
 
     clearEvents(){
         this.events.clear();

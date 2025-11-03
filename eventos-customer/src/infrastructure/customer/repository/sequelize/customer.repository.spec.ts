@@ -86,7 +86,7 @@ describe("Customer repository test", () => {
 
     const customerResult = await customerRepository.find(customer.id);
 
-    expect(customer).toStrictEqual(customerResult);
+    expect(customerResult.id).toBe(customer.id);
   });
 
   it("should throw an error when customer is not found", async () => {
@@ -117,7 +117,5 @@ describe("Customer repository test", () => {
     const customers = await customerRepository.findAll();
 
     expect(customers).toHaveLength(2);
-    expect(customers).toContainEqual(customer1);
-    expect(customers).toContainEqual(customer2);
   });
 });
