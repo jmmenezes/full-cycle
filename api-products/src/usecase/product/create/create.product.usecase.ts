@@ -4,6 +4,7 @@ import {
   OutputCreateProductDto,
 } from "./create.product.dto";
 import ProductFactory from "../../../domain/product/factory/product.factory";
+import Product from "../../../domain/product/entity/product";
 
 export default class CreateProductUseCase {
   private productRepository: ProductRepositoryInterface;
@@ -21,6 +22,8 @@ export default class CreateProductUseCase {
       input.price
     );
 
+    await this.productRepository.create(new Product(product.id, product.name, product.price));
+    
     return {
       id: product.id,
       name: product.name,
