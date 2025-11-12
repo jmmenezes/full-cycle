@@ -5,7 +5,7 @@ import {
   OutputListProductDto,
 } from "./list.product.dto";
 
-export default class ListCustomerUseCase {
+export default class ListProductUseCase {
   private productRepository: ProductRepositoryInterface;
   constructor(productRepository: ProductRepositoryInterface) {
     this.productRepository = productRepository;

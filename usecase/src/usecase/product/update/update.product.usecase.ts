@@ -3,7 +3,7 @@ import {
   InputUpdateProductDto,
   OutputUpdateProductDto,
 } from "./update.product.dto";
-export default class UpdateCustomerUseCase {
+export default class UpdateProductUseCase {
   private productRepository: ProductRepositoryInterface;
   constructor(productRepository: ProductRepositoryInterface) {
     this.productRepository = productRepository;
