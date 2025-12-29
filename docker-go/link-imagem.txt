@@ -1,0 +1,2 @@
+# Imagem poder ser executada do dockerhub através de:
+docker run 7633320/fullcycle
