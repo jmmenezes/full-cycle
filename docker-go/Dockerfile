@@ -1,5 +1,5 @@
 # Imagem para compilação
-FROM golang:1.23-alpine AS builder
+FROM golang:1.19-alpine AS builder
 
 # Certificados SSL
 COPY proxy1.crt /usr/local/share/ca-certificates/
@@ -9,17 +9,18 @@ RUN update-ca-certificates
 # Diretório de trabalho
 WORKDIR /app
 
+# Copia os arquivos de dependências (se existirem)
+COPY go.mod ./
+RUN go mod download
+
 # Copia o restante do código fonte
-COPY . .
+COPY full-cycle.go .
 
 # Compila o binário de forma estática (ideal para Docker)
 RUN CGO_ENABLED=0 GOOS=linux go build -o full-cycle .
 
 # Imagem para compilação
 FROM alpine:latest
-
-# Instala certificados de segurança (importante para chamadas HTTPS)
-RUN apk --no-cache add ca-certificates
 
 WORKDIR /root/
 
