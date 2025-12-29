@@ -20,7 +20,7 @@ COPY full-cycle.go .
 RUN CGO_ENABLED=0 GOOS=linux go build -o full-cycle .
 
 # Imagem para compilação
-FROM alpine:latest
+FROM scratch
 
 WORKDIR /root/
 
