@@ -1,0 +1,8 @@
+# A imagem GO pode ser gerada através do comando:
+docker build -t jmmenezes/fullcycle . -f Dockerfile
+
+# Para executar a imagem gerada local:
+docker run jmmenezes/fullcycle
+
+# Para executar a imagem que foi enviada ao DockerHub, utilizar:
+docker run 7633320/fullcycle
