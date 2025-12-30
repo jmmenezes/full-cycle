@@ -1,8 +1,7 @@
 FROM node:15
 
 # Certificados SSL
-COPY proxy1.crt /usr/local/share/ca-certificates/
-COPY proxy2.crt /usr/local/share/ca-certificates/
+COPY proxy*.cr[t] /usr/local/share/ca-certificates/
 RUN update-ca-certificates 
 
 # Redireciona os repositórios para o archive.debian.org (EOF do node 15)
