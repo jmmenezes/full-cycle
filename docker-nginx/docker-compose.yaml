@@ -10,7 +10,7 @@ services:
       - ./node:/usr/src/app
     tty: true
     ports: 
-      - "8080:3000"
+      - "3000:3000"
     depends_on: 
        - db
 
@@ -25,6 +25,18 @@ services:
       - ./mysql_data:/var/lib/mysql
     networks: 
       - node-network
+
+  nginx:
+    build:
+      context: nginx
+    container_name: nginx
+    networks: 
+      - node-network
+    tty: true
+    ports: 
+      - "8080:80"
+    depends_on: 
+       - app
 
 networks: 
   node-network:
