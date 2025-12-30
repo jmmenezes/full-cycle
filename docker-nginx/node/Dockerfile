@@ -5,7 +5,10 @@ COPY proxy1.crt /usr/local/share/ca-certificates/
 COPY proxy2.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates 
 
-WORKDIR /usr/src/app
+# Redireciona os repositórios para o archive.debian.org (EOF do node 15)
+RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list && \
+    sed -i 's|security.debian.org/debian-security|archive.debian.org/debian-security|g' /etc/apt/sources.list && \
+    sed -i '/stretch-updates/d' /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -y wget
 
@@ -14,6 +17,10 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-EXPOSE 3000
+WORKDIR /usr/src/app
+COPY package*.json ./
+COPY index.js ./
+RUN npm install
 
-# CMD ["node","index.js"]
+EXPOSE 3000
+CMD dockerize -wait tcp://db:3306 -timeout 30s node index.js

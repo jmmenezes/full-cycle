@@ -4,3 +4,4 @@ node_modules
 dist
 proxy1.crt
 proxy2.crt
+mysql_data
