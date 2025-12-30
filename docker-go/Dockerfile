@@ -2,8 +2,7 @@
 FROM golang:1.19-alpine AS builder
 
 # Certificados SSL
-COPY proxy1.crt /usr/local/share/ca-certificates/
-COPY proxy2.crt /usr/local/share/ca-certificates/
+COPY proxy*.cr[t] /usr/local/share/ca-certificates/
 RUN update-ca-certificates 
 
 # Diretório de trabalho
